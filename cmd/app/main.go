@@ -16,10 +16,12 @@ func main() {
 	}
 
 	r := gin.Default()                                                   // создание роутера
-	r.LoadHTMLGlob("/root/go/src/MTUCI-VvIT-labs/lab-4/web/templates/*") // загрузка шаблонов
+	r.LoadHTMLGlob("/root/go/src/MTUCI-VvIT-labs/lab-5/web/templates/*") // загрузка шаблонов
 
-	r.GET("/login", handlers.LoginPage)       // обработка запроса на страницу логина
-	r.POST("/login/", handlers.Authorization) // обработка запроса на авторизацию
+	r.GET("/login", handlers.LoginPage)               // обработка запроса на страницу логина
+	r.POST("/login/", handlers.Authorization)         // обработка запроса на авторизацию
+	r.GET("/registration", handlers.RegistrationPage) // обработка запроса на страницу регистрации
+	r.POST("/registration/", handlers.Registration)   // обработка запроса на регистрацию
 
 	err = r.Run()   // запуск сервера
 	if err != nil { // обработка ошибок при запуске сервера
