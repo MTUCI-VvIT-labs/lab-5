@@ -3,6 +3,7 @@ package handlers
 import (
 	"MTUCI-VvIT-labs/lab-4/pkg/pg"
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v4"
 	"net/http"
@@ -40,8 +41,9 @@ func parseForm(c *gin.Context) (string, string, string) {
 
 // isUserExist проверяет существование пользователя с таким логином
 func isUserExist(login string) (isExist bool) {
-	row := pg.DB.QueryRow(context.Background(), "SELECT * FROM service.users WHERE login=$1", login)
-	err := row.Scan()
+	fmt.Println(login)
+	row := pg.DB.QueryRow(context.Background(), "SELECT login FROM service.users WHERE login=$1", login)
+	err := row.Scan(&login)
 	if err == pgx.ErrNoRows {
 		return false
 	} else if err == nil {
